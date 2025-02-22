@@ -1,0 +1,8 @@
+{
+  "tokens": {
+    "discord_token": "Discord token here please"
+  },
+  "additional": {
+    "prefix": "This_is_here_because_we_don't_know_how_to_get_rid_of_it"
+  }
+}
