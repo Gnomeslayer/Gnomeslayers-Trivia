@@ -81,6 +81,17 @@ class commands(Cog):
 
     @trivia_group.command()
     async def add_category(self, interaction:Interaction, category:str):
+        roles = interaction.user.roles
+        proceed = False
+        for role in roles:
+            if role.id in self.config['roles_that_can_add_questions']:
+                proceed = True
+                break
+        
+        if not proceed:
+            await interaction.response.send_message("You do not have permission to run this command!", ephemeral=True)
+            return
+        
         if category in self.categories:
             await interaction.response.send_message("That category is already there.")
         else:
@@ -91,6 +102,17 @@ class commands(Cog):
     @trivia_group.command()
     @app_commands.autocomplete(category=autocomplete)
     async def add_audio_question(self, interaction:Interaction, question:str, audio_file:discord.Attachment, category:str=None):
+        roles = interaction.user.roles
+        proceed = False
+        for role in roles:
+            if role.id in self.config['roles_that_can_add_questions']:
+                proceed = True
+                break
+        
+        if not proceed:
+            await interaction.response.send_message("You do not have permission to run this command!", ephemeral=True)
+            return
+    
         if not category:
             category = "General"
 
@@ -110,6 +132,17 @@ class commands(Cog):
     @trivia_group.command()
     @app_commands.autocomplete(category=autocomplete)
     async def add_image_question(self, interaction:Interaction, question:str, image_file:discord.Attachment, category:str = None):
+        roles = interaction.user.roles
+        proceed = False
+        for role in roles:
+            if role.id in self.config['roles_that_can_add_questions']:
+                proceed = True
+                break
+        
+        if not proceed:
+            await interaction.response.send_message("You do not have permission to run this command!", ephemeral=True)
+            return
+    
         if not category:
             category = "General"
         if image_file.content_type and image_file.content_type.startswith('image/'):
@@ -126,6 +159,17 @@ class commands(Cog):
     @trivia_group.command()
     @app_commands.autocomplete(category=autocomplete)
     async def add_question(self, interaction:Interaction, question:str, category:str = None):
+        roles = interaction.user.roles
+        proceed = False
+        for role in roles:
+            if role.id in self.config['roles_that_can_add_questions']:
+                proceed = True
+                break
+        
+        if not proceed:
+            await interaction.response.send_message("You do not have permission to run this command!", ephemeral=True)
+            return
+    
         if not category:
             category = "General"
         modal = answers()
@@ -138,6 +182,17 @@ class commands(Cog):
     @trivia_group.command()
     @app_commands.autocomplete(category=autocomplete)
     async def start(self, interaction:Interaction, interval_seconds:int = None, channel:discord.TextChannel = None, category:str=None):
+        roles = interaction.user.roles
+        proceed = False
+        for role in roles:
+            if role.id in self.config['roles_that_can_start_stop_trivia']:
+                proceed = True
+                break
+        
+        if not proceed:
+            await interaction.response.send_message("You do not have permission to run this command!", ephemeral=True)
+            return
+    
         await interaction.response.defer(ephemeral=True)
         if not channel:
             try:
@@ -176,6 +231,17 @@ class commands(Cog):
 
     @trivia_group.command()
     async def stop(self, interaction:Interaction):
+        roles = interaction.user.roles
+        proceed = False
+        for role in roles:
+            if role.id in self.config['roles_that_can_start_stop_trivia']:
+                proceed = True
+                break
+        
+        if not proceed:
+            await interaction.response.send_message("You do not have permission to run this command!", ephemeral=True)
+            return
+    
         if not self.trivia_running:
             await interaction.response.send_message("Trivia is not running!", ephemeral=True)
             return
