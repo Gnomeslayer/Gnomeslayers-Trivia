@@ -3,5 +3,10 @@
         "footer_text": "Hello World footer",
         "footer_image": "",
         "color": "0x11806a"
+    },
+    "report": {
+        "footer_text": "Hello World footer",
+        "footer_image": "",
+        "color": "0x11806a"
     }
 }
