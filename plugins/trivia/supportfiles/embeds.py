@@ -17,7 +17,7 @@ class trivia_embeds():
                       color=int(embed_settings['color'], base=16))
         
         submitted_by = self.bot.get_user(int(question['submitted_by']))
-        embed.add_field(name="Question info", value=f"Category: {question['category']}, submitted by: {submitted_by.mention}")
+        embed.add_field(name="Question info", value=f"Category: {question['category']}\nsubmitted by: {submitted_by.mention}")
 
         return embed
     
