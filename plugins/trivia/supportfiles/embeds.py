@@ -16,7 +16,10 @@ class trivia_embeds():
                       description="You get a bonus point if you don't view the options!",
                       color=int(embed_settings['color'], base=16))
         
-        submitted_by = self.bot.get_user(int(question['submitted_by']))
+        try:
+            submitted_by = self.bot.get_user(int(question['submitted_by']))
+        except Exception as e:
+            submitted_by = "Nobody."
         embed.add_field(name="Question info", value=f"Category: {question['category']}\nsubmitted by: {submitted_by.mention}")
 
         return embed
